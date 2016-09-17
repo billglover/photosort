@@ -33,7 +33,9 @@ func handleFile(p string, finfo os.FileInfo, err error) error {
 		return exifErr
 	}
 
-	log.Printf("Parser status: %s\n", em["status"])
+	for i, tag := range em {
+		log.Printf("\t%s : %s\n", i, tag)
+	}
 
 	return nil
 }
