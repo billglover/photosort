@@ -9,8 +9,21 @@ The idea for this command line utility, `exifls` is to take a path to a set of i
 
 To build and run this utility against a sample set of images use the following commands from the root folder of the project.
 
-    go build -v ./cmd/...
-    ./exifls ./sample_data/*
+```
+go build -v ./cmd/...
+./exifls ./sample_data/*
+```
+
+Sample output should look something similar to this.
+
+```
+2016/09/17 20:50:41 File: 2016-09-16 17.07.34.jpg
+2016/09/17 20:50:41 Parser status: done
+2016/09/17 20:50:41 File: error_file
+2016/09/17 20:50:41 Unable to parse image header: EOF
+2016/09/17 20:50:41 File: random_file
+2016/09/17 20:50:41 The image doesn't appear to be a JPEG. Unknown header found.
+```
 
 ### Approach
 
