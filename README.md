@@ -51,5 +51,6 @@ There is an article by Ben Johnson (@benbjohnson) on the [Standard Package Layou
 ### References
 
  - Exchangeable image file format for digital still cameras: Exif Version 2.2 ([pdf](http://www.exif.org/Exif2-2.PDF))
+ - Exchangeable image file format for digital still cameras: Exif Version 2.3 ([pdf](http://www.cipa.jp/std/documents/e/DC-008-2012_E.pdf)
  - [Description of the Exif file format](http://www.media.mit.edu/pia/Research/deepview/exif.html)
  - [How is Exif info encoded](http://stackoverflow.com/questions/1821515/how-is-exif-info-encoded)
