@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/billglover/photosort/exif"
 	"log"
 	"os"
@@ -21,7 +20,7 @@ func main() {
 // handleFile is called once for each file found in the path. It
 // returns an error if it is unable to open the file for read.
 func handleFile(p string, finfo os.FileInfo, err error) error {
-	fmt.Printf("File: %s\n", finfo.Name())
+	log.Printf("File: %s\n", finfo.Name())
 
 	f, fileErr := os.Open(p)
 	if fileErr != nil {
@@ -34,7 +33,7 @@ func handleFile(p string, finfo os.FileInfo, err error) error {
 		return exifErr
 	}
 
-	fmt.Printf("Parser status: %s\n", em["status"])
+	log.Printf("Parser status: %s\n", em["status"])
 
 	return nil
 }
