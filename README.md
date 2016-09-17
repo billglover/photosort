@@ -17,12 +17,22 @@ go build -v ./cmd/...
 Sample output should look something similar to this.
 
 ```
-2016/09/17 20:50:41 File: 2016-09-16 17.07.34.jpg
-2016/09/17 20:50:41 Parser status: done
-2016/09/17 20:50:41 File: error_file
-2016/09/17 20:50:41 Unable to parse image header: EOF
-2016/09/17 20:50:41 File: random_file
-2016/09/17 20:50:41 The image doesn't appear to be a JPEG. Unknown header found.
+2016/09/17 22:54:44 File: 2016-09-16 17.07.34.jpg
+2016/09/17 22:54:44     Model : unknown
+2016/09/17 22:54:44     Make : unknown
+2016/09/17 22:54:44     XResolution : unknown
+2016/09/17 22:54:44     YResolution : unknown
+2016/09/17 22:54:44     ResolutionUnit : unknown
+2016/09/17 22:54:44     Software : unknown
+2016/09/17 22:54:44     DateTime : unknown
+2016/09/17 22:54:44     YCbCrPositioning : unknown
+2016/09/17 22:54:44     Exif IFD : unknown
+2016/09/17 22:54:44     Orientation : unknown
+2016/09/17 22:54:44     GPS IFD : unknown
+2016/09/17 22:54:44 File: error_file
+2016/09/17 22:54:44 Unable to parse image header: EOF
+2016/09/17 22:54:44 File: random_file
+2016/09/17 22:54:44 The image doesn't appear to be a JPEG. Unknown header found.
 ```
 
 ### Approach
