@@ -7,6 +7,11 @@ Much of the data we use when sorting photos is stored as hidden meta-data within
 
 The idea for this command line utility, `exifls` is to take a path to a set of images (`.jpg` only for now) and to list the data extracted from the images.
 
+To build and run this utility against a sample set of images use the following commands from the root folder of the project.
+
+    go build -v ./cmd/...
+    ./exifls ./sample_data/*
+
 ### Approach
 
 There is an article by Ben Johnson (@benbjohnson) on the [Standard Package Layout](https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1#.176t0epef) that has been doing the rounds in the Go community. On first read, I didn't understand many of the things talked about. In building `exifls` I'm going to attempt to follow the package structure outlined in the article. Some other thoughts on my approach are:

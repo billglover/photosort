@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/billglover/photosort/exif"
 	"log"
 	"os"
 	"path/filepath"
@@ -21,5 +22,19 @@ func main() {
 // returns an error if it is unable to open the file for read.
 func handleFile(p string, finfo os.FileInfo, err error) error {
 	fmt.Printf("File: %s\n", finfo.Name())
+
+	f, fileErr := os.Open(p)
+	if fileErr != nil {
+		return fileErr
+	}
+	defer f.Close()
+
+	em, exifErr := exif.Parse(f)
+	if exifErr != nil {
+		return exifErr
+	}
+
+	fmt.Printf("Parser status: %s\n", em["status"])
+
 	return nil
 }
