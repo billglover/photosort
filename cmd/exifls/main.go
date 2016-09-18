@@ -22,15 +22,15 @@ func main() {
 func handleFile(p string, finfo os.FileInfo, err error) error {
 	log.Printf("parsing file: %s\n", finfo.Name())
 
-	f, fileErr := os.Open(p)
-	if fileErr != nil {
-		return fileErr
+	f, err := os.Open(p)
+	if err != nil {
+		return err
 	}
 	defer f.Close()
 
-	em, exifErr := exif.Parse(f)
-	if exifErr != nil {
-		return exifErr
+	em, err := exif.Parse(f)
+	if err != nil {
+		return err
 	}
 
 	for i, tag := range em {
