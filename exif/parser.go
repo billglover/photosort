@@ -19,7 +19,7 @@ func Parse(r io.Reader) (ExifMap, error) {
 	header := make([]byte, 2)
 	_, err := r.Read(header)
 	if err != nil {
-		return m, fmt.Errorf("Unable to parse image header: %s", err)
+		return m, fmt.Errorf("unable to parse image header: %s", err)
 	}
 
 	// An if statement might make sense here but I have used a
@@ -28,7 +28,7 @@ func Parse(r io.Reader) (ExifMap, error) {
 	case JpegHeader:
 		break
 	default:
-		return m, fmt.Errorf("The image doesn't appear to be a JPEG. Unknown header found.")
+		return m, fmt.Errorf("the image doesn't appear to be a JPEG. Unknown header found.")
 	}
 
 	// look for the APP1 marker which signifies the start
@@ -37,7 +37,7 @@ func Parse(r io.Reader) (ExifMap, error) {
 	for string(b) != App1Header {
 		_, err := r.Read(b)
 		if err != nil {
-			return m, fmt.Errorf("Unable to locate the APP1 header: %s", err)
+			return m, fmt.Errorf("unable to locate the APP1 header: %s", err)
 		}
 	}
 
@@ -46,25 +46,25 @@ func Parse(r io.Reader) (ExifMap, error) {
 	size := make([]byte, 2)
 	_, err = r.Read(size)
 	if err != nil {
-		return m, fmt.Errorf("Unable to determine the size of the APP1 header: %s", err)
+		return m, fmt.Errorf("unable to determine the size of the APP1 header: %s", err)
 	}
 
 	// look for the EXIF header
 	exifHeader := make([]byte, 4)
 	_, err = r.Read(exifHeader)
 	if err != nil {
-		return m, fmt.Errorf("Unable to locate the Exif header: %s", err)
+		return m, fmt.Errorf("unable to locate the Exif header: %s", err)
 	}
 
 	if string(exifHeader) != ExifHeader {
-		return m, fmt.Errorf("Unable to parse the Exif header. Found '%s' expected 'Exif'", string(exifHeader))
+		return m, fmt.Errorf("unable to parse the Exif header, found '%s' expected 'Exif'", string(exifHeader))
 	}
 
 	// look for the padding following the EXIF header
 	p := make([]byte, 2)
 	_, err = r.Read(p)
 	if err != nil {
-		return m, fmt.Errorf("Unable to parse the Exif header: %s", err)
+		return m, fmt.Errorf("unable to parse the Exif header: %s", err)
 	}
 
 	// look for the byte order marker
@@ -72,11 +72,11 @@ func Parse(r io.Reader) (ExifMap, error) {
 	bom := make([]byte, 2)
 	_, err = r.Read(bom)
 	if err != nil {
-		return m, fmt.Errorf("Unable to locate the Exif byte order marker: %s", err)
+		return m, fmt.Errorf("unable to locate the Exif byte order marker: %s", err)
 	}
 
 	if string(bom) != ByteOrderMarker {
-		return m, fmt.Errorf("Unexpected byte order marker for JPEG file. Found '%s' expected 'MM'", string(bom))
+		return m, fmt.Errorf("unexpected byte order marker for JPEG file, found '%s' expected 'MM'", string(bom))
 	}
 
 	// look for the TAG marker
@@ -84,11 +84,11 @@ func Parse(r io.Reader) (ExifMap, error) {
 	tag := make([]byte, 2)
 	_, err = r.Read(tag)
 	if err != nil {
-		return m, fmt.Errorf("Unable to locate the TAG marker: %s", err)
+		return m, fmt.Errorf("unable to locate the TAG marker: %s", err)
 	}
 
 	if string(tag) != TagMarker {
-		return m, fmt.Errorf("Unexpected TAG marker for JPEG file. Found '%s' expected '%s'", string(tag), TagMarker)
+		return m, fmt.Errorf("unexpected TAG marker for JPEG file, found '%s' expected '%s'", string(tag), TagMarker)
 	}
 
 	// look for the offset to the first IFD
@@ -99,7 +99,7 @@ func Parse(r io.Reader) (ExifMap, error) {
 	o := make([]byte, 4)
 	_, err = r.Read(o)
 	if err != nil {
-		return m, fmt.Errorf("Unable to locate the offset to the first IFD: %s", err)
+		return m, fmt.Errorf("unable to locate the offset to the first IFD: %s", err)
 	}
 
 	offset := int(binary.BigEndian.Uint32(o))
@@ -113,7 +113,7 @@ func Parse(r io.Reader) (ExifMap, error) {
 	entries := make([]byte, 2)
 	_, err = buff.Read(entries)
 	if err != nil {
-		return m, fmt.Errorf("Unable to read the number of entries in the IFD: %s", err)
+		return m, fmt.Errorf("unable to read the number of entries in the IFD: %s", err)
 	}
 	tags := int(binary.BigEndian.Uint16(entries))
 
@@ -123,21 +123,21 @@ func Parse(r io.Reader) (ExifMap, error) {
 		tag := make([]byte, 2)
 		_, err = buff.Read(tag)
 		if err != nil {
-			return m, fmt.Errorf("Unable to parse Exif tag type: %s", err)
+			return m, fmt.Errorf("unable to parse Exif tag type: %s", err)
 		}
 
 		// determine the data format
 		format := make([]byte, 2)
 		_, err = buff.Read(format)
 		if err != nil {
-			return m, fmt.Errorf("Unable to parse Exif tag data format: %s", err)
+			return m, fmt.Errorf("unable to parse Exif tag data format: %s", err)
 		}
 
 		// determine the number of components in the tag value
 		components := make([]byte, 4)
 		_, err = buff.Read(components)
 		if err != nil {
-			return m, fmt.Errorf("Unable to parse Exif tag data format: %s", err)
+			return m, fmt.Errorf("unable to parse Exif tag data format: %s", err)
 		}
 		//nc := int(binary.BigEndian.Uint32(components))
 		name, ok := TagNames[uint(binary.BigEndian.Uint16(tag))]
