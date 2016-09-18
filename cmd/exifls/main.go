@@ -20,7 +20,7 @@ func main() {
 // handleFile is called once for each file found in the path. It
 // returns an error if it is unable to open the file for read.
 func handleFile(p string, finfo os.FileInfo, err error) error {
-	log.Printf("File: %s\n", finfo.Name())
+	log.Printf("parsing file: %s\n", finfo.Name())
 
 	f, fileErr := os.Open(p)
 	if fileErr != nil {
